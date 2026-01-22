@@ -1,1 +1,33 @@
+3412. Find Mirror Score of a String
 
+class Solution {
+    public long calculateScore(String s) {
+        long score=0;
+        HashMap<Character,Stack<Integer>> map=new HashMap<>();
+        HashMap<Character, Character> mirror = new HashMap<>();
+        for (char c = 'a'; c <= 'z'; c++) {
+            mirror.put(c, (char) ('z' - (c - 'a')));
+        }
+        for(int i=0;i<s.length();i++){
+            char x=s.charAt(i);
+            char y=mirror.get(x);
+            Stack<Integer> st=new Stack<>();
+            if(!map.containsKey(y)){
+                if(!map.containsKey(x)){   
+                    st.push(i);
+                    map.put(x,st);
+                }
+                else{
+                    map.get(x).push(i);
+                }
+                continue;
+            }
+            int idx=map.get(y).pop();
+            if(map.get(y).isEmpty()){
+                map.remove(y);
+            }
+            score+=i-idx;
+        }
+        return score;
+    }
+}
