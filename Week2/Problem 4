@@ -1,7 +1,6 @@
 Question 1856. Maximum Subarray Min-Product
 
 
-https://leetcode.com/problems/maximum-subarray-min-product/submissions/1890722649
 class Solution {
     public int maxSumMinProduct(int[] nums) {
         Stack<Integer> st = new Stack<>();
