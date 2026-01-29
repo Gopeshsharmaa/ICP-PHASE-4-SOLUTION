@@ -1,1 +1,22 @@
+950. Reveal Cards In Increasing Order
 
+class Solution {
+    public int[] deckRevealedIncreasing(int[] deck) {
+        if(deck.length<=1) return deck;
+        int[] res=new int[deck.length];
+        Arrays.sort(deck);
+        Queue<Integer> q=new LinkedList<>();
+        for(int i=deck.length-1;i>0;i--){
+            q.offer(deck[i]);
+            int x=q.poll();
+            q.offer(x);
+        }
+        q.offer(deck[0]);
+        int i=deck.length-1;
+        while(!q.isEmpty()){
+            res[i]=q.poll();
+            i--;
+        }
+        return res;
+    }
+}
