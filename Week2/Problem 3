@@ -1,1 +1,47 @@
+Question 907. Sum of Subarray Minimums
 
+
+https://leetcode.com/problems/sum-of-subarray-minimums/submissions/1890072703
+class Solution {
+    public int sumSubarrayMins(int[] arr) {
+        Stack<Integer> st = new Stack<>();
+        int n = arr.length;
+        int nsl[] = new int[n];
+        int nsr[] = new int[n];
+        for(int i=0;i<arr.length;i++){
+            while(!st.isEmpty() && arr[i]<arr[st.peek()]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                nsl[i] = -1;
+            }
+            else{
+                nsl[i] = st.peek();
+            }
+            st.push(i);
+        }
+        st.clear();
+        for(int i=arr.length-1;i>=0;i--){
+            while(!st.isEmpty() && arr[i]<=arr[st.peek()]){
+                st.pop();
+            }
+            if(st.isEmpty()){
+                nsr[i] = n;
+            }
+            else{
+                nsr[i] = st.peek();
+            }
+            st.push(i);
+        }
+        long sum =0;
+        int mod = 1000000007;
+        for(int i=0;i<arr.length;i++){
+            long nl = i-nsl[i];
+            long nr = nsr[i] - i;
+            long totalway = nl*nr;
+            long totalsum = arr[i]*totalway;
+            sum = (sum+totalsum)%mod;
+        }
+        return (int) sum;
+    }
+}
