@@ -1,7 +1,6 @@
 Question 907. Sum of Subarray Minimums
 
 
-https://leetcode.com/problems/sum-of-subarray-minimums/submissions/1890072703
 class Solution {
     public int sumSubarrayMins(int[] arr) {
         Stack<Integer> st = new Stack<>();
